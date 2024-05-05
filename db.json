@@ -4,7 +4,13 @@
         "id": "1",
         "name": "Eliza Cohen",
         "distance": 5,
-        "time": "50"
+        "time": 50
+      },
+      {
+        "id": "2",
+        "name": "Eliza Cohen",
+        "distance": 7,
+        "time": 60
       }
     ]
   }

@@ -1,0 +1,17 @@
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid white;
+}
+
+form {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.runner-data {
+    border-collapse: collapse;
+    border: 3px solid rgba(232, 142, 109, 0.525);
+    text-align: center;
+}
