@@ -1,18 +1,6 @@
 {
   "runners": [
     {
-      "id": "1",
-      "name": "Eliza Cohen",
-      "distance": 5,
-      "time": 50
-    },
-    {
-      "id": "2",
-      "name": "Eliza Cohen",
-      "distance": 7,
-      "time": 60
-    },
-    {
       "id": "d3f1",
       "name": "Gabe",
       "distance": "3",
@@ -23,6 +11,36 @@
       "name": "Pistachio",
       "distance": "2",
       "time": "45"
+    },
+    {
+      "id": "89c5",
+      "name": "Eliza",
+      "distance": "10",
+      "time": "90"
+    },
+    {
+      "id": "ea59",
+      "name": "Pistachio",
+      "distance": "3",
+      "time": "90"
+    },
+    {
+      "id": "df26",
+      "name": "Eliza",
+      "distance": "5",
+      "time": "40"
+    },
+    {
+      "id": "b1b5",
+      "name": "Gabe",
+      "distance": "1",
+      "time": "6"
+    },
+    {
+      "id": "7080",
+      "name": "Eliza",
+      "distance": "3",
+      "time": "20"
     }
   ]
 }

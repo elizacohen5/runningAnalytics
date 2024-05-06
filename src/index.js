@@ -15,7 +15,6 @@ function createCell(column, content, str, element) {
 }
 
 function displayRunners() {
-    
         fetch("http://localhost:3000/runners")
         .then(response => response.json())
         // Need to sort an array of objects based on one value in the array
@@ -47,6 +46,16 @@ function displayRunners() {
                 button.textContent = "x"
                 buttonCol.appendChild(button)
                 tableRow.append(buttonCol);
+
+                document.getElementById(`${tableRow.id}`).addEventListener("mouseenter", (event) => {
+                    const targetRow = event.target;
+                    targetRow.style["background-color"] = "yellow"; 
+                })
+
+                document.getElementById(`${tableRow.id}`).addEventListener("mouseleave", (event) => {
+                    const targetRow = event.target;
+                    targetRow.style["background-color"] = "white"; 
+                })
 
                 document.getElementById(button.id).addEventListener("click", () => {
                     deleteRunner(runner.id);
@@ -100,11 +109,22 @@ function addSubmitListener() {
             buttonCol.appendChild(button)
             tableRow.append(buttonCol);
 
+            document.getElementById(`${tableRow.id}`).addEventListener("mouseenter", (event) => {
+                const targetRow = event.target;
+                targetRow.style["background-color"] = "yellow"; 
+            })
+
+            document.getElementById(`${tableRow.id}`).addEventListener("mouseleave", (event) => {
+                const targetRow = event.target;
+                targetRow.style["background-color"] = "white"; 
+            })
+
             document.getElementById(button.id).addEventListener("click", () => {
                 deleteRunner(runner.id);
                 document.getElementById(`${tableRow.id}`).remove();
                 console.log(`The deleted table id is: ${tableRow.id}`);
             })
+            document.getElementById("runner-info").reset();
         })
     })
 }
