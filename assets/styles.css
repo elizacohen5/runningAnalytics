@@ -1,3 +1,12 @@
+body {
+    background-color: rgba(232, 142, 109, 0.525);
+}
+
+form {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
 table {
     table-layout: fixed;
     width: 100%;
@@ -5,13 +14,46 @@ table {
     border: 3px solid white;
 }
 
-form {
-    margin-top: 50px;
-    margin-bottom: 50px;
+thead th:nth-child(1) {
+    width: 23.5%
+}
+
+thead th:nth-child(2) {
+    width: 23.5%
+}
+
+thead th:nth-child(3) {
+    width: 23.5%
+}
+
+thead th:nth-child(4) {
+    width: 23.5%
+}
+
+thead th:nth-child(5) {
+    width: 6%
+}
+
+.button {
+    background-color: rgb(234, 77, 77);
 }
 
 .runner-data {
     border-collapse: collapse;
     border: 3px solid rgba(232, 142, 109, 0.525);
     text-align: center;
+    background-color: white;
 }
+
+th {
+    padding: 5px;
+    background-color: black;
+    border: 3px solid rgba(232, 142, 109, 0.525);
+    color: white;
+}
+
+tr, td {
+    padding: 20px
+}
+
+

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href='./assets/styles.css' />
-  <script src="src/index.js"></script>
+  <script defer src="src/index.js"></script>
   <title>Running Analytics</title>
 </head>
 <body>
@@ -17,15 +17,19 @@
         <input name="distance" id="input-distance" />
         <label for="time" type="number">Total Minutes: </label>
         <input name="time" id="input-time" />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" id="submit"/>
     </form>
 
     <table>
-       <tr>
-        <th>Name</th>
-        <th>Distance</th>
-        <th>Time</th>
-       </tr>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Distance</th>
+                <th>Time</th>
+                <th>Pace</th>
+                <th></th>
+            </tr>
+        </thead>
     </table>
    
 </body>
