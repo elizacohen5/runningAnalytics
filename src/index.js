@@ -1,17 +1,8 @@
-// Fetch runner data from db.json. 
-
-// 1. Fetch runner data from db.json and format into a table. 
-// 2. Add in / calculate pace per mile functionality 
-// 3. Add event listener on the "submit" button to create a POST request adding new 
-// runners to database
-// 4. Sort array of runners based on pace per mile 
-// 5. Add in delete button column 
-// 6. Add a "hover" event listener when hovering over a row
-// 7. MAYBE: Add another row to the table and "checkbox" to see runners projected race data 
 
 function createCell(column, content, str, element) {
     column.textContent = content + str;
     element.append(column);
+    column.id = `column${Math.random()}`;
 }
 
 function createRunner(athlete) {
@@ -19,7 +10,8 @@ function createRunner(athlete) {
     tableRow.id = athlete.id;
     tableRow.className = "runner-data"
     document.querySelector("table").append(tableRow);
-    const pace = Math.round((athlete.time / athlete.distance) * 10) / 10;
+    paceMin = Math.floor((athlete.time / athlete.distance));
+    paceSec = Math.floor(((athlete.time / athlete.distance) - Math.floor((athlete.time / athlete.distance))) * 60);
 
     const col1 = document.createElement("td");
     const col2 = document.createElement("td");
@@ -29,25 +21,53 @@ function createRunner(athlete) {
     createCell(col1, athlete.name, "", tableRow)
     createCell(col2, athlete.distance, " Miles", tableRow)
     createCell(col3, athlete.time, " Minutes", tableRow)
-    createCell(col4, pace, " min/mi", tableRow)
+    createCell(col4, `${paceMin} min`, ` / ${paceSec} sec`, tableRow)
+
+    const checkCol = document.createElement("td");
+    const checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.className = "checkBox";
+    checkBox.id = `checkbox${athlete.id}`;
+    checkCol.appendChild(checkBox);
+    tableRow.append(checkCol);
 
     const buttonCol = document.createElement("td");
     const button = document.createElement("button")
     button.className = "button"
     button.id = `button${athlete.id}`;
-    console.log(button.id);
     button.textContent = "x"
     buttonCol.appendChild(button)
     tableRow.append(buttonCol);
 
     document.getElementById(`${tableRow.id}`).addEventListener("mouseenter", (event) => {
         const targetRow = event.target;
-        targetRow.style["background-color"] = "yellow"; 
+        targetRow.style["background-color"] = "rgb(250, 210, 77)"; 
     })
 
     document.getElementById(`${tableRow.id}`).addEventListener("mouseleave", (event) => {
         const targetRow = event.target;
         targetRow.style["background-color"] = "white"; 
+    })
+
+    document.getElementById(checkBox.id).addEventListener("click", () => {
+            const roundedPace = (miles) => Math.floor((athlete.time / athlete.distance) * miles);
+            const remainderPace = (miles) => Math.floor((athlete.time * miles) % (athlete.distance * miles));
+    
+            function generateRaceTimes(column, race, distance) {
+                document.getElementById(column.id).textContent = `${race} Time: ${roundedPace(distance)} min / ${remainderPace(distance)} sec`;
+            }
+            generateRaceTimes(col1, "5k", 3)
+            generateRaceTimes(col2, "10k", 6)
+            generateRaceTimes(col3, "Half Marathon", 13.1)
+            generateRaceTimes(col4, "Marathon", 26.1)
+    })
+
+    document.getElementById(checkBox.id).addEventListener("click", () => {
+        if (document.getElementById(checkBox.id).checked) {
+            console.log("checked");
+        } else {
+            console.log("unchecked");
+        }
     })
 
     document.getElementById(button.id).addEventListener("click", () => {
@@ -58,14 +78,16 @@ function createRunner(athlete) {
 }
 
 function displayRunners() {
-        fetch("http://localhost:3000/runners")
+    fetch("http://localhost:3000/runners")
         .then(response => response.json())
-        // Need to sort an array of objects based on one value in the array
-        .then(runners => {
-            const unSortedRunners = runners.map((runner) => {
-                createRunner(runner);
-            })
+        .then(runners => { 
+            runners.sort((a, b) => {
+                return ((a.time / a.distance) * 10) / 10 - ((b.time / b.distance) * 10) / 10
         })
+            runners.map((runner) => {
+                createRunner(runner);
+        })
+    })
 }
 
 function addSubmitListener() {

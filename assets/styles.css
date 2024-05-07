@@ -1,10 +1,25 @@
 body {
+    font-family: "Montserrat", sans-serif;
     background-color: rgba(232, 142, 109, 0.525);
+}
+
+.header {
+    padding: 2px;
+    text-align: center;
+    background: rgba(218, 58, 0, 0.525);
+    font-size: 15px;
+    color: black;
+    width: 100%;
 }
 
 form {
     margin-top: 50px;
     margin-bottom: 40px;
+}
+
+input {
+    font-family: inherit;
+    font-size: 100%;
 }
 
 table {
@@ -15,27 +30,33 @@ table {
 }
 
 thead th:nth-child(1) {
-    width: 23.5%
+    width: 21%
 }
 
 thead th:nth-child(2) {
-    width: 23.5%
+    width: 21%
 }
 
 thead th:nth-child(3) {
-    width: 23.5%
+    width: 21%
 }
 
 thead th:nth-child(4) {
-    width: 23.5%
+    width: 21%
 }
 
 thead th:nth-child(5) {
-    width: 6%
+    width: 10%
 }
+
+thead th:nth-child(6) {
+    width: 6%
+} 
 
 .button {
     background-color: rgb(234, 77, 77);
+    font-family: inherit;
+    font-size: 100%;
 }
 
 .runner-data {
