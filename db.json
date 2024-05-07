@@ -31,16 +31,16 @@
       "time": "40"
     },
     {
-      "id": "b1b5",
-      "name": "Gabe",
-      "distance": "1",
-      "time": "6"
-    },
-    {
       "id": "7080",
       "name": "Eliza",
       "distance": "3",
       "time": "20"
+    },
+    {
+      "id": "ec39",
+      "name": "Gabe",
+      "distance": "2",
+      "time": "13"
     }
   ]
 }
