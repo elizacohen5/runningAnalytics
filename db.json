@@ -19,12 +19,6 @@
       "time": "20"
     },
     {
-      "id": "c02b",
-      "name": "Tom",
-      "distance": "7",
-      "time": "59"
-    },
-    {
       "id": "f144",
       "name": "Max",
       "distance": "3",
@@ -37,7 +31,13 @@
       "time": "100"
     },
     {
-      "id": "10e4",
+      "id": "05eb",
+      "name": "Curtis",
+      "distance": "8",
+      "time": "73"
+    },
+    {
+      "id": "361c",
       "name": "Diego",
       "distance": "10",
       "time": "75"

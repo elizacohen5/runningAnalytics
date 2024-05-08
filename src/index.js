@@ -5,15 +5,6 @@ function createCell(column, content, str, element) {
     column.id = `column${Math.random()}`;
 }
 
-
-// break out time / distance as a function 
-function generateRaceTimes(column, race, distance) {
-    document.getElementById(column.id).textContent = `${race} Time: ${roundedPace(distance)} min / ${remainderPace(distance)} sec`;
-}
-
-const roundedPace = (miles) => Math.floor((athlete.time / athlete.distance) * miles);
-const remainderPace = (miles) => Math.floor((athlete.time * miles) % (athlete.distance * miles));
-
 function createRunner(athlete, arr) {
     const tableRow = document.createElement("tr");
     tableRow.id = athlete.id;
@@ -70,6 +61,12 @@ function createRunner(athlete, arr) {
 
     document.getElementById(checkBox.id).addEventListener("click", () => {
         if (document.getElementById(checkBox.id).checked) {
+            const roundedPace = (miles) => Math.floor((athlete.time / athlete.distance) * miles);
+            const remainderPace = (miles) => Math.floor((athlete.time * miles) % (athlete.distance * miles));
+    
+            function generateRaceTimes(column, race, distance) {
+                document.getElementById(column.id).textContent = `${race} Time: ${roundedPace(distance)} min / ${remainderPace(distance)} sec`;
+            }
 
             generateRaceTimes(col2, "5k", 3)
             generateRaceTimes(col3, "10k", 6)
