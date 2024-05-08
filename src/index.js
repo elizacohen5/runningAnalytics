@@ -5,7 +5,16 @@ function createCell(column, content, str, element) {
     column.id = `column${Math.random()}`;
 }
 
-function createRunner(athlete) {
+
+// break out time / distance as a function 
+function generateRaceTimes(column, race, distance) {
+    document.getElementById(column.id).textContent = `${race} Time: ${roundedPace(distance)} min / ${remainderPace(distance)} sec`;
+}
+
+const roundedPace = (miles) => Math.floor((athlete.time / athlete.distance) * miles);
+const remainderPace = (miles) => Math.floor((athlete.time * miles) % (athlete.distance * miles));
+
+function createRunner(athlete, arr) {
     const tableRow = document.createElement("tr");
     tableRow.id = athlete.id;
     tableRow.className = "runner-data"
@@ -17,11 +26,21 @@ function createRunner(athlete) {
     const col2 = document.createElement("td");
     const col3 = document.createElement("td");
     const col4 = document.createElement("td");
+    const col5 = document.createElement("td");
 
-    createCell(col1, athlete.name, "", tableRow)
-    createCell(col2, athlete.distance, " Miles", tableRow)
-    createCell(col3, athlete.time, " Minutes", tableRow)
-    createCell(col4, `${paceMin} min`, ` / ${paceSec} sec`, tableRow)
+    createCell(col1, arr.indexOf(athlete) + 1, "", tableRow)
+    createCell(col2, athlete.name, "", tableRow)
+    createCell(col3, athlete.distance, " Miles", tableRow)
+    createCell(col4, athlete.time, " Minutes", tableRow)
+    createCell(col5, `${paceMin} min`, ` / ${paceSec} sec`, tableRow)
+
+    const initialData = {
+        col1: arr.indexOf(athlete) + 1,
+        col2: athlete.name, 
+        col3: athlete.distance,
+        col4: athlete.time,
+        col5: `${paceMin} min / ${paceSec} sec`
+    }
 
     const checkCol = document.createElement("td");
     const checkBox = document.createElement("input");
@@ -50,23 +69,20 @@ function createRunner(athlete) {
     })
 
     document.getElementById(checkBox.id).addEventListener("click", () => {
-            const roundedPace = (miles) => Math.floor((athlete.time / athlete.distance) * miles);
-            const remainderPace = (miles) => Math.floor((athlete.time * miles) % (athlete.distance * miles));
-    
-            function generateRaceTimes(column, race, distance) {
-                document.getElementById(column.id).textContent = `${race} Time: ${roundedPace(distance)} min / ${remainderPace(distance)} sec`;
-            }
-            generateRaceTimes(col1, "5k", 3)
-            generateRaceTimes(col2, "10k", 6)
-            generateRaceTimes(col3, "Half Marathon", 13.1)
-            generateRaceTimes(col4, "Marathon", 26.1)
-    })
-
-    document.getElementById(checkBox.id).addEventListener("click", () => {
         if (document.getElementById(checkBox.id).checked) {
-            console.log("checked");
+
+            generateRaceTimes(col2, "5k", 3)
+            generateRaceTimes(col3, "10k", 6)
+            generateRaceTimes(col4, "Half Marathon", 13.1)
+            generateRaceTimes(col5, "Marathon", 26.1)
+
         } else {
-            console.log("unchecked");
+
+            col1.textContent = initialData.col1;
+            col2.textContent = initialData.col2;
+            col3.textContent = initialData.col3 + " Miles";
+            col4.textContent = initialData.col4 + " Minutes";
+            col5.textContent = initialData.col5;
         }
     })
 
@@ -85,7 +101,7 @@ function displayRunners() {
                 return ((a.time / a.distance) * 10) / 10 - ((b.time / b.distance) * 10) / 10
         })
             runners.map((runner) => {
-                createRunner(runner);
+                createRunner(runner, runners);
         })
     })
 }
@@ -107,10 +123,17 @@ function addSubmitListener() {
             })
         })
         .then(response => response.json())
-        .then(runner => {
-            createRunner(runner);
-            document.getElementById("runner-info").reset();
+        .then(() => {
+            fetch("http://localhost:3000/runners")
+            .then(response => response.json())
+            .then(data => {
+                for (let i = 0; i < data.length - 1; i++) {
+                    document.querySelector("table").deleteRow(1);
+                }
+                displayRunners();
+            })
         })
+        document.getElementById("runner-info").reset();
     })
 }
 

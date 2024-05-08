@@ -7,24 +7,6 @@
       "time": "20"
     },
     {
-      "id": "101c",
-      "name": "Pistachio",
-      "distance": "2",
-      "time": "45"
-    },
-    {
-      "id": "89c5",
-      "name": "Eliza",
-      "distance": "10",
-      "time": "90"
-    },
-    {
-      "id": "ea59",
-      "name": "Pistachio",
-      "distance": "3",
-      "time": "90"
-    },
-    {
       "id": "df26",
       "name": "Eliza",
       "distance": "5",
@@ -41,6 +23,24 @@
       "name": "Tom",
       "distance": "7",
       "time": "59"
+    },
+    {
+      "id": "f144",
+      "name": "Max",
+      "distance": "3",
+      "time": "49"
+    },
+    {
+      "id": "a986",
+      "name": "Stanley",
+      "distance": "9",
+      "time": "100"
+    },
+    {
+      "id": "10e4",
+      "name": "Diego",
+      "distance": "10",
+      "time": "75"
     }
   ]
 }
