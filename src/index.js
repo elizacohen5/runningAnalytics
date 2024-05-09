@@ -132,7 +132,6 @@ function createRunner(athlete, arr) {
     document.getElementById(button.id).addEventListener("click", () => {
         deleteRunner(athlete.id);
         document.getElementById(`${tableRow.id}`).remove();
-        console.log(`The deleted table id is: ${tableRow.id}`);
     })
 }
 
