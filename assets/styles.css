@@ -30,27 +30,27 @@ table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
-    border: 3px solid white;
+    /* border: 3px solid white; */
 }
 
 thead th:nth-child(1) {
-    width: 5%
+    width: 6%
 }
 
 thead th:nth-child(2) {
-    width: 19.75%
+    width: 21%
 }
 
 thead th:nth-child(3) {
-    width: 19.75%
+    width: 21%
 }
 
 thead th:nth-child(4) {
-    width: 19.75%
+    width: 21%
 }
 
 thead th:nth-child(5) {
-    width: 19.75%
+    width: 15%
 }
 
 thead th:nth-child(6) {

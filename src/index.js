@@ -5,18 +5,51 @@ function createCell(column, content, str, element) {
     column.id = `column${Math.random()}`;
 }
 
+function formatTimes(time) {
+    if (time <= 9) {
+       return time = "0"+time;
+    } else {
+        return time
+    }
+}
+
+function addUnitOfTime(unit) {
+    return unit + Math.floor(60 * ((unit / 60) - Math.floor(unit / 60)))
+}
+
+function calculateSec(minutes, seconds) {
+    if (seconds > 60) {
+        minutes += Math.floor(seconds / 60);
+        const newSec = Math.floor((addUnitOfTime(seconds) - (Math.floor((seconds / 60) * 60))) / 2);
+        return newSec;
+    } else {
+        return seconds;
+    }
+}
+
 function generateRaceTimes(column, race, distance, roundedFunction, remainderFunction, athlete) {
     const col = document.getElementById(column.id);
-    const time = roundedFunction(distance, athlete)
-    const dist = remainderFunction(distance, athlete)
-    col.textContent = `${race} Time: ${time} min / ${dist} sec`;
+    let min = roundedFunction(distance, athlete);
+    let sec = remainderFunction(distance, athlete);
+    
+    if (min > 60) {
+        const hour = Math.floor(min / 60);
+        newMin = Math.floor(((addUnitOfTime(min) - (hour * 60))) / 2);
+        col.textContent = `${race}: ${hour}:${formatTimes(newMin)}:${formatTimes(calculateSec(min, sec))}`;
+    } else {
+        col.textContent = `${race}: ${min}:${formatTimes(calculateSec(min, sec))}`;
+    }
 }
 
 function roundedPace(miles, athlete) {
-    return Math.floor((athlete.time / athlete.distance) * miles)
+    return Math.floor(pace(athlete) * miles)
 }
 function remainderPace(miles, athlete) {
     return Math.floor((athlete.time * miles) % (athlete.distance * miles))
+}
+
+function pace(athlete) {
+    return (athlete.time / athlete.distance);
 }
 
 function createRunner(athlete, arr) {
@@ -25,7 +58,7 @@ function createRunner(athlete, arr) {
     tableRow.className = "runner-data"
     document.querySelector("table").append(tableRow);
     paceMin = Math.floor((athlete.time / athlete.distance));
-    paceSec = Math.floor(((athlete.time / athlete.distance) - Math.floor((athlete.time / athlete.distance))) * 60);
+    paceSec = Math.floor((pace(athlete) - Math.floor(pace(athlete))) * 60);
 
     const col1 = document.createElement("td");
     const col2 = document.createElement("td");
@@ -37,14 +70,19 @@ function createRunner(athlete, arr) {
     createCell(col2, athlete.name, "", tableRow)
     createCell(col3, athlete.distance, " Miles", tableRow)
     createCell(col4, athlete.time, " Minutes", tableRow)
-    createCell(col5, `${paceMin} min`, ` / ${paceSec} sec`, tableRow)
+
+    if (paceSec <= 9) {
+        createCell(col5, `${paceMin}:`, `0${paceSec}`, tableRow)
+    } else {
+        createCell(col5, `${paceMin}:`, `${paceSec}`, tableRow)
+    }
 
     const initialData = {
         col1: arr.indexOf(athlete) + 1,
         col2: athlete.name, 
         col3: athlete.distance,
         col4: athlete.time,
-        col5: `${paceMin} min / ${paceSec} sec`
+        col5: `${paceMin}:${formatTimes(paceSec)}`
     }
 
     const checkCol = document.createElement("td");
